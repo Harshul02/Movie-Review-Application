@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/home/Home';
 import Header from './components/header/Header';
+import Trailer from './components/trailer/Trailer';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
     <Header />
       <Routes>
         <Route path='/' element={<Home movies={movies} />} />
+        <Route path="/Trailer/:ytTrailerId" element={<Trailer/>}></Route>
         <Route path='/layout' element={<Layout />} />
       </Routes>
     </BrowserRouter>
