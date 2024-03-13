@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './components/home/Home';
+import Header from './components/header/Header';
 
 function App() {
 
@@ -9,8 +13,8 @@ function App() {
   const getMovies = async () => {
     try{
       const response  = await axios.get("http://localhost:8080/api/v1/movies");
-      console.log(response);
-      setMovies(response);
+      console.log(response.data);
+      setMovies(response.data);
     }catch(error){
       console.log(error);
     }
@@ -18,11 +22,17 @@ function App() {
 
   useEffect(() => {
     getMovies();
-  })
+  }, []);
 
   return (
-    <div className="App display-4">
-      Hello World
+    <div className="App">
+    <BrowserRouter>
+    <Header />
+      <Routes>
+        <Route path='/' element={<Home movies={movies} />} />
+        <Route path='/layout' element={<Layout />} />
+      </Routes>
+    </BrowserRouter>
     </div>
   );
 }
